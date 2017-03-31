@@ -28,8 +28,8 @@ Scenario: Validate creating relationship between Doc1 and Doc 2 as poleary on Ho
   Given path 'projects', project_id , 'documents', source_doc_id , 'relationships'
   When method get
   Then status 200
-  And match /Relationships/Relationship/RelatedDocument/@Id == '271341877549073143'
-  And match /Relationships/Relationship/Direction/@Id == '819cad43-0838-47f3-b4a3-e977fb1d0dfe'
+  And match /Relationships/Relationship/RelatedDocument/@Id == '#(target_doc_id)'
+  And match /Relationships/Relationship/Direction/@Id == '#(direction_id)'
 
   #Validate the target document link works
 #  * match response.Relationships..Link.Href == '/api/projects/1879048400/register/271341877549073143/metadata'
