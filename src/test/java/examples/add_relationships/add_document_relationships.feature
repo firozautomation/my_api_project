@@ -3,9 +3,9 @@ Feature: Add Documents Relationships External API
 Background:
   # Configuration
   * url 'https://qa106.aconex.com/api/document-relationships'
-  * def signIn = read ('classpath:sign-in.js')
-  * def poleary = call signIn { username: 'poleary', password: 'ac0n3x72' }
-  * configure headers = read('classpath:my-headers.json')
+  * def basicAuth = read ('classpath:sign-in.js')
+  * def poleary = call basicAuth { username: 'poleary', password: 'ac0n3x72' }
+  * configure headers = read('classpath:default-headers.json')
   # Global Vars
   * def project_id =  '1879048400'
   * def source_doc_id = '271341877549134014'
