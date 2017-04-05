@@ -1,0 +1,31 @@
+External API Automation Project
+===============================
+
+Project : EXT_API
+project ID: 1879048454
+
+
+Users with Manage Access
+========================
+poleary [1879049107]
+sspiteri [1879049124]
+ahalim [1879049122]
+knga [1879049259]  [Account Locked]
+bbrown [1879049753] [Account Disabled]
+
+Users without Manage Access
+===========================
+pgoh [1879049249]
+htran [1879049257]
+tyeung [1879049123]
+
+
+Non-project owning org (complete refrigeration)
+===============================================
+tbates [1879048665]
+jcook [1879048572]
+jbanks  [1879048574]
+
+Valid user from Majestic that is not on this project
+======================================
+jdoe [1879049762]

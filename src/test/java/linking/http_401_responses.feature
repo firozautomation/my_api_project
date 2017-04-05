@@ -1,4 +1,6 @@
 Feature: Handle all the Doc Linking API cases that result in HTTP 401 - UNAUTHORISED
+  Reference Stories:
+  XTN-4246: Implement exception handling for Authorization case
 
 Background:
   # Configuration
@@ -19,8 +21,8 @@ Background:
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'unauthorized'
-    And match /Error/ErrorDescription == 'failed authorization attempt'
+    And match /Error/ErrorCode == 'UNAUTHORIZED'
+    And match /Error/ErrorDescription == 'Failed authorization attempt'
 
     Examples:
       | method | status |
@@ -33,8 +35,8 @@ Background:
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'unauthorized'
-    And match /Error/ErrorDescription == 'failed authorization attempt'
+    And match /Error/ErrorCode == 'UNAUTHORIZED'
+    And match /Error/ErrorDescription == 'Failed authorization attempt'
 
     Examples:
       | method | status |
@@ -48,8 +50,8 @@ Background:
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'unauthorized'
-    And match /Error/ErrorDescription == 'failed authorization attempt'
+    And match /Error/ErrorCode == 'UNAUTHORIZED'
+    And match /Error/ErrorDescription == 'Failed authorization attempt'
 
     Examples:
       | method | status |
@@ -63,8 +65,8 @@ Background:
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'unauthorized'
-    And match /Error/ErrorDescription == 'failed authorization attempt'
+    And match /Error/ErrorCode == 'UNAUTHORIZED'
+    And match /Error/ErrorDescription == 'Failed authorization attempt'
 
     Examples:
       | method | status |
@@ -78,8 +80,8 @@ Background:
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'unauthorized'
-    And match /Error/ErrorDescription == 'failed authorization attempt'
+    And match /Error/ErrorCode == 'UNAUTHORIZED'
+    And match /Error/ErrorDescription == 'Failed authorization attempt'
 
     Examples:
       | method | status |
@@ -93,8 +95,8 @@ Background:
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'unauthorized'
-    And match /Error/ErrorDescription == 'failed authorization attempt'
+    And match /Error/ErrorCode == 'UNAUTHORIZED'
+    And match /Error/ErrorDescription == 'Failed authorization attempt'
 
     Examples:
       | method | status |
@@ -108,8 +110,8 @@ Background:
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'unauthorized'
-    And match /Error/ErrorDescription == 'failed authorization attempt'
+    And match /Error/ErrorCode == 'UNAUTHORIZED'
+    And match /Error/ErrorDescription == 'Failed authorization attempt'
 
     Examples:
       | method | status |
@@ -124,7 +126,7 @@ Background:
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'not-found'
+    And match /Error/ErrorCode == 'NOT-FOUND'
     And match /Error/ErrorDescription == 'Resource not found'
 
     Examples:

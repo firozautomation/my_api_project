@@ -21,7 +21,6 @@ Background:
 Scenario: Validate creating relationship between Doc1 and Doc 2 as poleary on Hotel VIP
 
   Given path 'projects', project_id , 'documents', source_doc_id , 'relationships'
-  And path 'projects/#(project_id)/documents/#(doc_id)/relationships'
   And header Authorization = poleary
   And request
   """
