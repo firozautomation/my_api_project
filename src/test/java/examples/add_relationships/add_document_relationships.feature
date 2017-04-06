@@ -10,8 +10,8 @@ Feature: Add Documents Relationships External API
       return 'Basic ' + auth_type.encode(s.username + ":" + s.password);
     }
     """
-    * def poleary = call basicAuth { username:'poleary', password:'ac0n3x72'}
     * configure headers = read('classpath:default-headers.json')
+
     # Global Vars
     * def project_id =  '1879048400'
     * def source_doc_id = '271341877549134014'
@@ -20,7 +20,6 @@ Feature: Add Documents Relationships External API
 
   Scenario: Validate creating relationship between Doc1 and Doc 2 as poleary on Hotel VIP
     Given path 'projects', project_id , 'documents', source_doc_id , 'relationships'
-    And header Authorization = poleary
     And request
   """
   <Relationships>
@@ -29,8 +28,6 @@ Feature: Add Documents Relationships External API
   """
     When method post
     Then status 201
-    Then def relationship_id = response/Relationship/@Id
-
     Given path 'projects', project_id , 'documents', source_doc_id , 'relationships'
     When method get
     Then status 200

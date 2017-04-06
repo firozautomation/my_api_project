@@ -6,7 +6,6 @@ Feature: Handle all the Doc Linking API cases that result in HTTP 401 - UNAUTHOR
     # Configuration
     * url 'https://qa106.aconex.com/api/document-relationships'
     * def basicAuth = read ('classpath:sign-in.js')
-    * def poleary = call basicAuth { username: 'poleary', password: 'ac0n3x72' }
     * configure headers = read('classpath:default-headers.json')
 
     # Global Vars
@@ -21,8 +20,8 @@ Feature: Handle all the Doc Linking API cases that result in HTTP 401 - UNAUTHOR
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'UNAUTHORIZED'
-    And match /Error/ErrorDescription == 'No authorization provided'
+    And match /Error/ErrorCode == 'NO_SUITABLE_AUTHENTICATION_METHOD'
+    And match /Error/ErrorDescription == 'No suitable authentication method was found in the request, i.e. basic authentication headers were not present'
 
     Examples:
       | method | status |
@@ -35,8 +34,8 @@ Feature: Handle all the Doc Linking API cases that result in HTTP 401 - UNAUTHOR
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'UNAUTHORIZED'
-    And match /Error/ErrorDescription == 'Invalid credentials'
+    And match /Error/ErrorCode == 'LOGIN_FAILED'
+    And match /Error/ErrorDescription == 'The login credentials provided failed the validation process'
 
     Examples:
       | method | status |
@@ -49,8 +48,8 @@ Feature: Handle all the Doc Linking API cases that result in HTTP 401 - UNAUTHOR
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'UNAUTHORIZED'
-    And match /Error/ErrorDescription == 'Unsupported authentication type'
+    And match /Error/ErrorCode == 'NO_SUITABLE_AUTHENTICATION_METHOD'
+    And match /Error/ErrorDescription == 'No suitable authentication method was found in the request, i.e. basic authentication headers were not present'
 
     Examples:
       | method | status |
@@ -64,8 +63,8 @@ Feature: Handle all the Doc Linking API cases that result in HTTP 401 - UNAUTHOR
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'UNAUTHORIZED'
-    And match /Error/ErrorDescription == 'Invalid credentials'
+    And match /Error/ErrorCode == 'LOGIN_FAILED'
+    And match /Error/ErrorDescription == 'The login credentials provided failed the validation process'
 
     Examples:
       | method | status |
@@ -79,8 +78,8 @@ Feature: Handle all the Doc Linking API cases that result in HTTP 401 - UNAUTHOR
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'UNAUTHORIZED'
-    And match /Error/ErrorDescription == 'Invalid credentials'
+    And match /Error/ErrorCode == 'LOGIN_FAILED'
+    And match /Error/ErrorDescription == 'The login credentials provided failed the validation process'
 
     Examples:
       | method | status |
@@ -94,8 +93,8 @@ Feature: Handle all the Doc Linking API cases that result in HTTP 401 - UNAUTHOR
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'UNAUTHORIZED'
-    And match /Error/ErrorDescription == 'Invalid credentials'
+    And match /Error/ErrorCode == 'LOGIN_FAILED'
+    And match /Error/ErrorDescription == 'The login credentials provided failed the validation process'
 
     Examples:
       | method | status |
@@ -109,8 +108,8 @@ Feature: Handle all the Doc Linking API cases that result in HTTP 401 - UNAUTHOR
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'UNAUTHORIZED'
-    And match /Error/ErrorDescription == 'Invalid credentials'
+    And match /Error/ErrorCode == 'LOGIN_FAILED'
+    And match /Error/ErrorDescription == 'The login credentials provided failed the validation process'
 
     Examples:
       | method | status |
@@ -124,8 +123,8 @@ Feature: Handle all the Doc Linking API cases that result in HTTP 401 - UNAUTHOR
     And request ''
     When method <method>
     Then status <status>
-    And match /Error/ErrorCode == 'UNAUTHORIZED'
-    And match /Error/ErrorDescription == 'Invalid credentials'
+    And match /Error/ErrorCode == 'LOGIN_FAILED'
+    And match /Error/ErrorDescription == 'The login credentials provided failed the validation process'
 
     Examples:
       | method | status |

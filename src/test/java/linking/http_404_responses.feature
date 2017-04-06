@@ -6,7 +6,6 @@ Feature: Handle all the Doc Linking API cases that result in HTTP 404 - NOT FOUN
     # Configuration
     * url 'https://qa106.aconex.com/api/document-relationships'
     * def basicAuth = read ('classpath:sign-in.js')
-    * def poleary = call basicAuth { username: 'poleary', password: 'ac0n3x72' }
     * configure headers = read('classpath:default-headers.json')
 
     # Global Vars
