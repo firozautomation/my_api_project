@@ -13,8 +13,8 @@ function() {
   if (env == 'qa108') {
     // customize
     // e.g. config.foo = 'bar';
-      config.serverUrl: 'https://qa108.aconex.com';
-      config.documentRelationshipBaseUrl: 'https://qa108.aconex.com/api/document-relationships';
+      config.serverUrl = 'https://qa108.aconex.com';
+      config.documentRelationshipBaseUrl = 'https://qa108.aconex.com/api/document-relationships';
   } else if (env == 'ops1') {
 
       // customize

@@ -13,13 +13,12 @@
         <maven.compiler.version>3.6.0</maven.compiler.version>
     </properties>    
 
-    <dependencies>    
+    <dependencies>
         <dependency>
-            <groupId>com.intuit.karate</groupId>
-            <artifactId>karate-junit4</artifactId>
-            <version>0.2.7</version>
-            <scope>test</scope>
-        </dependency>		
+        <groupId>com.intuit.karate</groupId>
+        <artifactId>karate-junit4</artifactId>
+        <version>0.2.9</version>
+        </dependency>
     </dependencies>
 
     <build>

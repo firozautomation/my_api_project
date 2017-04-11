@@ -27,8 +27,6 @@ Feature: Handle all the Doc Linking API cases that result in HTTP 404 - NOT FOUN
 
     Examples:
       | method | status |
-      # GET from a user NOT on project should return a 404 - Resource not found
       | GET    | 404    |
-    # Not implemented yet
-#      | POST   | 404    |
-#      | DELETE | 404    |
+      | POST   | 404    |
+      | DELETE | 404    |
