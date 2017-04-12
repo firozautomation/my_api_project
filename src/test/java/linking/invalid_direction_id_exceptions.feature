@@ -71,7 +71,7 @@ Feature: Handle invalid Document ID and Project ID cases in the Doc Linking API
       | method |
       | POST   |
       | DELETE |
-@run
+
   Scenario Outline: Validate 400 when Direction Id is invalid but source and target document IDs are same
     Given path 'projects', project_id , 'documents', source_doc_id , 'relationships'
     And request
