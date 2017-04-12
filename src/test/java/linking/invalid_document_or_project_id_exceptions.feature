@@ -219,13 +219,13 @@ Feature: Handle invalid Document ID and Project ID cases in the Doc Linking API
     And request
     """
     <Relationships>
-     <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe" RelatedDocumentId='271341877_a?&reg;#ñ語中$="%AE'/>
+     <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe" RelatedDocumentId='271341877_a?;#ñ語中$="%AE'/>
     </Relationships>
     """
     When method <method>
     Then status <status>
     And match /Error/ErrorCode == 'INVALID_REQUEST'
-    And match /Error/ErrorDescription == "The following 'RelatedDocumentId' could not be found: 271341877_malformed"
+    And match /Error/ErrorDescription == "The following 'RelatedDocumentId' could not be found: 271341877_a?;#ñ語中$=\"%AE"
 
     Examples:
       | method | status |
