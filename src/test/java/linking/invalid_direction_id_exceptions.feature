@@ -1,4 +1,4 @@
-Feature: Handle invalid Document ID and Project ID cases in the Doc Linking API
+Feature: Handle invalid Direction ID cases in the Doc Linking API
   Reference Stories:
   XTN-4335: Validate direction ID in CREATE/DELETE return 400
 
@@ -83,12 +83,30 @@ Feature: Handle invalid Document ID and Project ID cases in the Doc Linking API
     When method <method>
     Then status 400
     And match /Error/ErrorCode == 'INVALID_REQUEST'
-    And match /Error/ErrorDescription == "The following 'DirectionId' is an invalid identifier: 819cad43-0838-47f3-b4a3-e977fb1d0dfe-invalid"
+    And match /Error/ErrorDescription == 'Source document is in relationships'
 
     Examples:
       | method |
       | POST   |
       | DELETE |
+
+  Scenario Outline: Expect HTTP 400 when Direction ID has kill string in it
+    Given path 'projects', project_id, 'documents', source_doc_id , 'relationships'
+    And request
+    """
+    <Relationships>
+     <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe_a?;#ñ語中$='%AE" RelatedDocumentId='271341877549174197'/>
+    </Relationships>
+    """
+    When method <method>
+    Then status <status>
+    And match /Error/ErrorCode == 'INVALID_REQUEST'
+    And match /Error/ErrorDescription == "The following 'DirectionId' is an invalid identifier: 819cad43-0838-47f3-b4a3-e977fb1d0dfe_a?;#ñ語中$='%AE"
+
+    Examples:
+      | method | status |
+      | POST   | 400    |
+      | DELETE | 400    |
 
   Scenario: Validate 400 when deleting a document relationship that is different to the one that exists
     Given path 'projects', project_id , 'documents', source_doc_id , 'relationships'
