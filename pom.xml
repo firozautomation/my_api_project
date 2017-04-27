@@ -16,8 +16,14 @@
     <dependencies>
         <dependency>
         <groupId>com.intuit.karate</groupId>
-        <artifactId>karate-junit4</artifactId>
-        <version>0.2.9</version>
+        <artifactId>karate-apache</artifactId>
+        <version>0.3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.intuit.karate</groupId>
+            <artifactId>karate-junit4</artifactId>
+            <version>0.3.1</version>
         </dependency>
     </dependencies>
 

@@ -4,7 +4,7 @@ Feature: Handle all the Doc Linking API cases that result in HTTP 401 - UNAUTHOR
 
   Background:
     # Configuration
-    * url 'https://qa106.aconex.com/api/document-relationships'
+    * url documentRelationshipBaseUrl
     * def basicAuth = read ('classpath:sign-in.js')
     * configure headers = read('classpath:default-headers.json')
 

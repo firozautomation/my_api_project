@@ -4,7 +4,7 @@ Feature: Handle invalid Direction ID cases in the Doc Linking API
 
   Background:
   # Configuration
-    * url 'https://qa106.aconex.com/api/document-relationships'
+    * url documentRelationshipBaseUrl
     * def basicAuth = read ('classpath:sign-in.js')
     * def poleary = call basicAuth { username: 'poleary', password: 'ac0n3x72' }
     * configure headers = read('classpath:default-headers.json')
@@ -15,6 +15,7 @@ Feature: Handle invalid Direction ID cases in the Doc Linking API
     * def source_doc_id = '271341877549174248'
     * def target_doc_id = '271341877549174197'
     * def direction_id = '819cad43-0838-47f3-b4a3-e977fb1d0dfe'
+
 
   Scenario Outline: Validate 400 when Adding one document relationship that invalid Direction Id
     Given path 'projects', project_id , 'documents', source_doc_id , 'relationships'

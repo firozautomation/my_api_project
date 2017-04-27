@@ -4,7 +4,7 @@ Feature: Handle invalid Document ID and Project ID cases in the Doc Linking API
 
   Background:
     # Configuration
-    * url 'https://qa106.aconex.com/api/document-relationships'
+    * url documentRelationshipBaseUrl
     * configure headers = read('classpath:default-headers.json')
     * def basicAuth = read('classpath:sign-in.js')
     * def poleary = call basicAuth { username: 'poleary', password: 'ac0n3x72' }
