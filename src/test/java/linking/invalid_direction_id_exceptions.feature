@@ -22,7 +22,7 @@ Feature: Handle invalid Direction ID cases in the Doc Linking API
     And request
   """
   <Relationships>
-  <Relationship DirectionId="948aee85-8962-4d36-ae12-e0279fd10c99INVALID" RelatedDocumentId="271341877549174197"/>
+    <Relationship DirectionId="948aee85-8962-4d36-ae12-e0279fd10c99INVALID" RelatedDocumentId="271341877549174197"/>
   </Relationships>
   """
     When method <method>
@@ -40,10 +40,10 @@ Feature: Handle invalid Direction ID cases in the Doc Linking API
     And request
   """
   <Relationships>
-  <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe" RelatedDocumentId="271341877549174121" />
-  <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe-invalid" RelatedDocumentId="271341877549174197" />
-  <Relationship DirectionId="948aee85-8962-4d36-ae12-e0279fd10c99" RelatedDocumentId="271341877549174240"/>
- </Relationships>
+    <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe" RelatedDocumentId="271341877549174121" />
+    <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe-invalid" RelatedDocumentId="271341877549174197" />
+    <Relationship DirectionId="948aee85-8962-4d36-ae12-e0279fd10c99" RelatedDocumentId="271341877549174240"/>
+  </Relationships>
   """
     When method <method>
     Then status 400
@@ -60,7 +60,7 @@ Feature: Handle invalid Direction ID cases in the Doc Linking API
     And request
   """
   <Relationships>
-  <Relationship DirectionId="" RelatedDocumentId='271341877549174121' />
+    <Relationship DirectionId="" RelatedDocumentId='271341877549174121' />
   </Relationships>
   """
     When method <method>
@@ -78,8 +78,8 @@ Feature: Handle invalid Direction ID cases in the Doc Linking API
     And request
   """
   <Relationships>
-  <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe-invalid" RelatedDocumentId="271341877549174248" />
- </Relationships>
+    <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe-invalid" RelatedDocumentId="271341877549174248" />
+  </Relationships>
   """
     When method <method>
     Then status 400
@@ -96,7 +96,7 @@ Feature: Handle invalid Direction ID cases in the Doc Linking API
     And request
     """
     <Relationships>
-     <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe_a?;#ñ語中$='%AE" RelatedDocumentId='271341877549174197'/>
+      <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe_a?;#ñ語中$='%AE" RelatedDocumentId='271341877549174197'/>
     </Relationships>
     """
     When method <method>
@@ -114,7 +114,7 @@ Feature: Handle invalid Direction ID cases in the Doc Linking API
     And request
   """
   <Relationships>
-  <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe" RelatedDocumentId="271341877549174197"/>
+    <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe" RelatedDocumentId="271341877549174197"/>
   </Relationships>
   """
     When method post
@@ -137,3 +137,43 @@ Feature: Handle invalid Direction ID cases in the Doc Linking API
     Then status 200
     And match /Relationships/Relationship/RelatedDocument/@Id == '#(target_doc_id)'
     And match /Relationships/Relationship/Direction/@Id == '#(direction_id)'
+
+  #XTN-4425
+  Scenario Outline: Validate 400 error when request body has invalid XML (Target Doc ID missing)
+    Given path 'projects', project_id , 'documents', source_doc_id , 'relationships'
+    And request
+  """
+  <Relationships>
+    <Relationship DirectionId="948aee85-8962-4d36-ae12-e0279fd10c99"  />
+    <Relationship DirectionId="948aee85-8962-4d36-ae12-e0279fd10c99" RelatedDocumentId="271341877549174191" />
+  </Relationships>
+  """
+    When method <method>
+    Then status <status>
+    And match /Error/ErrorCode == 'INVALID_REQUEST'
+    And match /Error/ErrorDescription == "The request body is invalid"
+
+    Examples:
+      | method | status |
+      | POST   | 400    |
+      | DELETE | 400    |
+
+  #XTN-4425
+  Scenario Outline: Validate 400 error when request body has invalid XML (Direction ID missing)
+    Given path 'projects', project_id , 'documents', source_doc_id , 'relationships'
+    And request
+  """
+  <Relationships>
+    <Relationship  RelatedDocumentId="271341877549174197" />
+    <Relationship DirectionId="948aee85-8962-4d36-ae12-e0279fd10c99" RelatedDocumentId="271341877549174191" />
+  </Relationships>
+  """
+    When method <method>
+    Then status <status>
+    And match /Error/ErrorCode == 'INVALID_REQUEST'
+    And match /Error/ErrorDescription == "The request body is invalid"
+
+    Examples:
+      | method | status |
+      | POST   | 400    |
+      | DELETE | 400    |
