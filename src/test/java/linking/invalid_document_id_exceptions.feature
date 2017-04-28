@@ -121,7 +121,7 @@ Feature: Handle invalid Source and Target Document ID cases in the Doc Linking A
       | method | status |
       | POST   | 400    |
       | DELETE | 400    |
-@run
+
   Scenario Outline: Expect HTTP 400 when Target Document ID is malformed
     Given path 'projects', project_id, 'documents', source_doc_id , 'relationships'
     And request
@@ -140,7 +140,7 @@ Feature: Handle invalid Source and Target Document ID cases in the Doc Linking A
       | POST   | 400    |
       | DELETE | 400    |
 
-  @killstring @run
+  @killstring
   Scenario Outline: Expect HTTP 400 when Target Document ID has kill string in it
     Given path 'projects', project_id, 'documents', source_doc_id , 'relationships'
     And request
