@@ -1,3 +1,4 @@
+@run
 Feature: Handle invalid Project ID cases in the Doc Linking API
   Reference Stories:
   XTN-4336: Validate Document IDs exist and are accessible 404 for Source and 400 for target document
@@ -8,7 +9,7 @@ Feature: Handle invalid Project ID cases in the Doc Linking API
     * configure headers = read('classpath:default-headers.json')
     * def basicAuth = read('classpath:sign-in.js')
     * def poleary = call basicAuth { username: 'poleary', password: 'ac0n3x72' }
-    * header Authorization = poleary
+#    * header Authorization = poleary - Karate Bug - The Authorization header has duplicate token (NOT being overwritten)
 
 
     # Global Vars
@@ -19,6 +20,7 @@ Feature: Handle invalid Project ID cases in the Doc Linking API
 
   Scenario Outline: Expect HTTP 404 when Project ID is invalid
     Given path 'projects', '1879048004', 'documents', source_doc_id , 'relationships'
+    And header Authorization = poleary
     And request
     """
     <Relationships>
@@ -39,6 +41,7 @@ Feature: Handle invalid Project ID cases in the Doc Linking API
 
   Scenario Outline: Expect HTTP 404 when Project ID is malformed
     Given path 'projects', '1879048004_malformed', 'documents', source_doc_id , 'relationships'
+    And header Authorization = poleary
     And request
     """
     <Relationships>
@@ -57,8 +60,10 @@ Feature: Handle invalid Project ID cases in the Doc Linking API
       | POST   | 404    |
       | DELETE | 404    |
 
+  @killstring
   Scenario Outline: Expect HTTP 404 when Project ID has a kill string in it
     Given path 'projects', '1879048004_a<u>?&reg;#ñ語中$=">>%AE</u>', 'documents', source_doc_id , 'relationships'
+    And header Authorization = poleary
     And request
     """
     <Relationships>
@@ -101,6 +106,7 @@ Feature: Handle invalid Project ID cases in the Doc Linking API
   # XTN-4424
   Scenario Outline: Expect HTTP 404 when Project ID is big integer
     Given path 'projects', '271341877549174268567567858768789', 'documents', source_doc_id , 'relationships'
+    And header Authorization = poleary
     And request
     """
    <Relationships>

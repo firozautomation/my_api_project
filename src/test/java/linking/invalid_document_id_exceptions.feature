@@ -58,24 +58,6 @@ Feature: Handle invalid Source and Target Document ID cases in the Doc Linking A
       | POST   | 404    |
       | DELETE | 404    |
 
-  Scenario Outline: Expect HTTP 404 when Source Document ID has a kill string in it
-    Given path 'projects', project_id, 'documents', '473586642038_a<u>?&reg;#ñ語中$=">>%AE</u>' , 'relationships'
-    And request
-    """
-    <Relationships>
-      <Relationship DirectionId="819cad43-0838-47f3-b4a3-e977fb1d0dfe" RelatedDocumentId="271341877549174268" />
-    </Relationships>
-
-    """
-    When method <method>
-    Then status <status>
-    And match $ == 'Not Found'
-
-    Examples:
-      | method | status |
-      | GET    | 404    |
-      | POST   | 404    |
-      | DELETE | 404    |
 
   Scenario Outline: Expect HTTP 404 when Source Document is confidential
     Given path 'projects', project_id, 'documents', '271341877549174594' , 'relationships'
@@ -139,7 +121,7 @@ Feature: Handle invalid Source and Target Document ID cases in the Doc Linking A
       | method | status |
       | POST   | 400    |
       | DELETE | 400    |
-
+@run
   Scenario Outline: Expect HTTP 400 when Target Document ID is malformed
     Given path 'projects', project_id, 'documents', source_doc_id , 'relationships'
     And request
@@ -151,13 +133,14 @@ Feature: Handle invalid Source and Target Document ID cases in the Doc Linking A
     When method <method>
     Then status <status>
     And match /Error/ErrorCode == 'INVALID_REQUEST'
-    And match /Error/ErrorDescription == "The following 'RelatedDocumentId' could not be found: 271341877_malformed"
+    And match /Error/ErrorDescription == "The request body is invalid"
 
     Examples:
       | method | status |
       | POST   | 400    |
       | DELETE | 400    |
 
+  @killstring @run
   Scenario Outline: Expect HTTP 400 when Target Document ID has kill string in it
     Given path 'projects', project_id, 'documents', source_doc_id , 'relationships'
     And request
@@ -169,7 +152,7 @@ Feature: Handle invalid Source and Target Document ID cases in the Doc Linking A
     When method <method>
     Then status <status>
     And match /Error/ErrorCode == 'INVALID_REQUEST'
-    And match /Error/ErrorDescription == "The following 'RelatedDocumentId' could not be found: 271341877_a?;#ñ語中$=\"%AE"
+    And match /Error/ErrorDescription == "The request body is invalid"
 
     Examples:
       | method | status |

@@ -91,6 +91,7 @@ Feature: Handle invalid Direction ID cases in the Doc Linking API
       | POST   |
       | DELETE |
 
+  @killstring
   Scenario Outline: Expect HTTP 400 when Direction ID has kill string in it
     Given path 'projects', project_id, 'documents', source_doc_id , 'relationships'
     And request
